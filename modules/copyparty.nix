@@ -1,4 +1,28 @@
 {...}: {
+	# create custom user and group for copyparty
+	users.groups.storage = {
+		gid = 993;
+	};
+	users.users.copyparty = {
+		name = "copyparty";
+		group = "storage";
+		isSystemUser = true;
+	};
+
+	system.activationScripts.mountstorage = {
+		text = ''
+		#!/bin/sh
+		mkdir -p /storage
+		chown -R root:storage /storage
+		'';
+	};
+
+	system.activationScripts.copypartypassword.text = ''
+		#!/bin/sh
+		mkdir -p /run/keys/copyparty
+		echo "cornago" > /run/keys/copyparty/k_password
+	'';
+
   services.copyparty = {
     enable = true;
     user = "copyparty";
