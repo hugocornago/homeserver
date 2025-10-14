@@ -7,6 +7,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -14,7 +16,7 @@
     nixpkgs,
     disko,
     ...
-  }: {
+  }@inputs: {
     nixosConfigurations.homeserver = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -23,6 +25,9 @@
 	./hardware-configuration.nix
         ./configuration.nix
       ];
+      specialArgs = {
+        inherit self inputs;
+      };
     };
   };
 }
