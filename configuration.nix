@@ -5,7 +5,8 @@
   ...
 }: {
   imports = [
-   ./modules/neovim/neovim.nix
+    ./modules/neovim/neovim.nix
+    ./modules/copyparty.nix
   ];
 
   boot = {
@@ -33,6 +34,8 @@
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOHAzlWTCK89b4vehheZHX724HmclxzHnOq4RBEyF99 private"
   ];
+
+	users.groups.storage.gid = 999;
 
   system.stateVersion = "25.05";
   nix.settings.experimental-features = ["nix-command" "flakes"];
