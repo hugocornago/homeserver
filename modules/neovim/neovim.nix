@@ -9,8 +9,8 @@
     defaultEditor = true;
     withRuby = false;
 
-    configure = {
-       customLuaRC = lib.fileContents ./init.lua;
-    };
+    # configure = {
+    #    customLuaRC = lib.fileContents ./init.lua;
+    # };
   };
 }
