@@ -7,7 +7,6 @@
   imports = [
     ./modules/neovim/neovim.nix
     ./modules/copyparty.nix
-		./modules/cloudflare-ddns.nix
   ];
 
   boot = {
