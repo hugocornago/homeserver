@@ -1,27 +1,27 @@
 {...}: {
-	# create custom user and group for copyparty
-	users.groups.storage = {
-		gid = 993;
-	};
-	users.users.copyparty = {
-		name = "copyparty";
-		group = "storage";
-		isSystemUser = true;
-	};
+  # create custom user and group for copyparty
+  users.groups.storage = {
+    gid = 993;
+  };
+  users.users.copyparty = {
+    name = "copyparty";
+    group = "storage";
+    isSystemUser = true;
+  };
 
-	system.activationScripts.mountstorage = {
-		text = ''
-		#!/bin/sh
-		mkdir -p /storage
-		chown -R root:storage /storage
-		'';
-	};
+  system.activationScripts.mountstorage = {
+    text = ''
+      #!/bin/sh
+      mkdir -p /storage
+      chown -R root:storage /storage
+    '';
+  };
 
-	system.activationScripts.copypartypassword.text = ''
-		#!/bin/sh
-		mkdir -p /run/keys/copyparty
-		echo "cornago" > /run/keys/copyparty/k_password
-	'';
+  system.activationScripts.copypartypassword.text = ''
+    #!/bin/sh
+    mkdir -p /run/keys/copyparty
+    echo "cornago" > /run/keys/copyparty/k_password
+  '';
 
   services.copyparty = {
     enable = true;
@@ -29,15 +29,15 @@
     group = "storage";
 
     # global settings
-    settings = { 
-			# network
+    settings = {
+      # network
       i = "0.0.0.0";
       p = [3923];
 
       # cores
-			j = 0; # auto
+      j = 0; # auto
       no-reload = true;
-			qr = false;
+      qr = false;
     };
 
     # create users
