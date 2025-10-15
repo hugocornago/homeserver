@@ -1,5 +1,8 @@
 { config, ...}: {
-  # cloudflared service install eyJhIjoiZDdjZTlkMzM5NDUxY2Y4MDJjNGE3YTc3MzFmNjA5OWMiLCJ0IjoiMjMzZjZlMTAtMzdjMS00ZDIxLWEyMDItY2U4NWFkMGI0Zjk3IiwicyI6Ik1qWTVaamt4TmpZdFlUY3lPQzAwWTJSbExXRXlNR1V0Wm1SaU5EazBaVFV6Tm1aayJ9
+  # quic-go udp buffer sizes
+	boot.kernel.sysctl."net.core.rmem_max" = 7500000;
+	boot.kernel.sysctl."net.core.wmem_max" = 7500000;
+
   services.cloudflared = {
     enable = true;
     tunnels = {
