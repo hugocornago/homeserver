@@ -25,7 +25,7 @@
   networking.networkmanager.enable = true;
   networking.firewall = {
 		enable = true;
-		allowedTCPPorts = [ 22 ];
+		allowedTCPPorts = [ 22 80 3923 ];
 	};
   services.openssh.enable = true;
 
@@ -38,6 +38,7 @@
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOHAzlWTCK89b4vehheZHX724HmclxzHnOq4RBEyF99 private"
+		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUJ2JVXfDvpPgZ8qzL804oJB/pG71g6MdZt4jkYP2sO cloudflare"
   ];
 
   system.stateVersion = "25.05";
