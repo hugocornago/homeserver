@@ -10,6 +10,10 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
     copyparty.url = "github:9001/copyparty";
+		sops-nix = {
+			url = "github:Mic92/sops-nix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
   };
 
   outputs = {
@@ -17,6 +21,7 @@
     nixpkgs,
     disko,
 		copyparty,
+		sops-nix,
     ...
   } @ inputs: let
     overlays = [
@@ -29,12 +34,15 @@
       modules = [
         disko.nixosModules.disko
         copyparty.nixosModules.default
-        ./disk-config.nix
-        ./hardware-configuration.nix
-        ./configuration.nix
+				sops-nix.nixosModules.sops
+
         {
           nixpkgs.overlays = overlays;
         }
+
+        ./disk-config.nix
+        ./hardware-configuration.nix
+        ./configuration.nix
       ];
       specialArgs = {
         inherit self inputs;
