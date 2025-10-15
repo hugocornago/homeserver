@@ -7,6 +7,7 @@
   imports = [
     ./modules/neovim/neovim.nix
     ./modules/copyparty.nix
+    ./modules/cloudflared.nix
   ];
 
   environment.systemPackages = with pkgs; [
