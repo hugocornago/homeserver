@@ -1,4 +1,4 @@
-{...}: {
+{config,...}: {
   # create custom user and group for copyparty
   users.groups.storage = {
     gid = 993;
@@ -17,11 +17,7 @@
     '';
   };
 
-  system.activationScripts.copypartypassword.text = ''
-    #!/bin/sh
-    mkdir -p /run/keys/copyparty
-    echo "cornago" > /run/keys/copyparty/k_password
-  '';
+	sops.secrets.copyparty-password.owner = "copyparty";
 
   services.copyparty = {
     enable = true;
@@ -42,7 +38,7 @@
 
     # create users
     accounts = {
-      cornago.passwordFile = "/run/keys/copyparty/k_password";
+      cornago.passwordFile = "${config.sops.secrets.copyparty-password.path}";
     };
 
     # create a volume
@@ -50,8 +46,7 @@
       "/" = {
         path = "/storage";
         access = {
-          r = "*";
-          rw = ["cornago"];
+          A = ["cornago"];
         };
         # see `copyparty --help-flags` for available options
         flags = {
