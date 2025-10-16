@@ -8,6 +8,7 @@
     ./modules/neovim/neovim.nix
     ./modules/copyparty.nix
     ./modules/cloudflared/cloudflared.nix
+    ./modules/attic.nix
   ];
 
   environment.systemPackages = with pkgs; [
