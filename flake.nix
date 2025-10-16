@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +15,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    attic = {
+      url = "github:zhaofengli/attic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -23,17 +27,18 @@
     disko,
     copyparty,
     sops-nix,
+    attic,
     ...
   } @ inputs: let
-		unstable-packages = final: prev: {
-			unstable = import inputs.nixpkgs-unstable {
-				system = "x86_64-linux";
-			};
-		};
+    unstable-packages = final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = "x86_64-linux";
+      };
+    };
     overlays = [
       inputs.neovim-nightly-overlay.overlays.default
       copyparty.overlays.default
-			unstable-packages
+      unstable-packages
     ];
   in {
     nixosConfigurations.homeserver = nixpkgs.lib.nixosSystem {
@@ -42,6 +47,7 @@
         disko.nixosModules.disko
         copyparty.nixosModules.default
         sops-nix.nixosModules.sops
+        attic.nixosModules.atticd
 
         {
           nixpkgs.overlays = overlays;

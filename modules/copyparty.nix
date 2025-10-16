@@ -1,4 +1,4 @@
-{config,...}: {
+{config, ...}: {
   # create custom user and group for copyparty
   users.groups.storage = {
     gid = 993;
@@ -17,7 +17,7 @@
     '';
   };
 
-	sops.secrets.copyparty-password.owner = "copyparty";
+  sops.secrets.copyparty-password.owner = "copyparty";
 
   services.copyparty = {
     enable = true;
