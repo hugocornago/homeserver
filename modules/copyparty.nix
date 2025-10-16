@@ -1,8 +1,6 @@
 {config, ...}: {
   # create custom user and group for copyparty
-  users.groups.storage = {
-    gid = 993;
-  };
+  users.groups.storage = {};
   users.users.copyparty = {
     name = "copyparty";
     group = "storage";
