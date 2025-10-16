@@ -8,6 +8,7 @@
     ./modules/neovim/neovim.nix
     ./modules/copyparty.nix
     ./modules/cloudflared/cloudflared.nix
+    ./modules/cache.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -32,7 +33,7 @@
   networking.networkmanager.enable = true;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 80 3923];
+    allowedTCPPorts = [22 80 3923 9033];
   };
   services.openssh.enable = true;
 
