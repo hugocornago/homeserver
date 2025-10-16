@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,15 +25,15 @@
     sops-nix,
     ...
   } @ inputs: let
-		unstable-packages = final: prev: {
-			unstable = import inputs.nixpkgs-unstable {
-				system = "x86_64-linux";
-			};
-		};
+    unstable-packages = final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = "x86_64-linux";
+      };
+    };
     overlays = [
       inputs.neovim-nightly-overlay.overlays.default
       copyparty.overlays.default
-			unstable-packages
+      unstable-packages
     ];
   in {
     nixosConfigurations.homeserver = nixpkgs.lib.nixosSystem {
