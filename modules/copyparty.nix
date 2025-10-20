@@ -37,6 +37,10 @@
 
       # reverse proxy
       rproxy = -1;
+
+      # deduplication
+      dedup = true;
+      safe-dedup = true;
     };
 
     # create users
