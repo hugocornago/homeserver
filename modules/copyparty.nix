@@ -12,6 +12,7 @@
       #!/bin/sh
       mkdir -p /storage
       chown -R root:storage /storage
+      chmod -R g+wrx /storage
     '';
   };
 
@@ -32,6 +33,10 @@
       j = 0; # auto
       no-reload = true;
       qr = false;
+      shr = "/shares";
+
+      # reverse proxy
+      rproxy = -1;
     };
 
     # create users
