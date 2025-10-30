@@ -10,6 +10,7 @@
     ./modules/cloudflared/cloudflared.nix
     ./modules/cache.nix
     ./modules/deluge.nix
+    ./modules/wireguard.nix
   ];
 
   environment.systemPackages = with pkgs; [

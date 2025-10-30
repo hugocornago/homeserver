@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 {
   sops.secrets = {
-    wg-private = {};
-    wg-preshared = {};
-    deluge-auth = {};
+    deluge-auth.owner = "deluge";
   };
 
   services.deluge = {
@@ -22,52 +20,31 @@
     group = "storage";
   };
 
-  # create a wg interface for deluge
-  systemd.services."netns@" = {
-   description = "%I network namespace";
-   before = [ "network.target" ];
-   serviceConfig = {
-     Type = "oneshot";
-     RemainAfterExit = true;
-     ExecStart = "${pkgs.iproute2}/bin/ip netns add %I";
-     ExecStop = "${pkgs.iproute2}/bin/ip netns del %I";
-   };
+  # route traffic through wireguard
+  systemd.services.deluged.bindsTo = [ "netns@wg.service" ];
+  systemd.services.deluged.requires = [ "network-online.target" "wg.service" ];
+  systemd.services.deluged.serviceConfig.NetworkNamespacePath = [ "/var/run/netns/wg" ];
+
+  # allowing delugeweb to access deluged in network namespace, a socket is necesary
+  systemd.sockets."proxy-to-deluged" = {
+   enable = true;
+   description = "Socket for Proxy to Deluge Daemon";
+   listenStreams = [ "58846" ];
+   wantedBy = [ "sockets.target" ];
   };
 
-  systemd.services.wg = {
-   description = "wg network interface";
-   bindsTo = [ "netns@wg.service" ];
-   requires = [ "network-online.target" ];
-   after = [ "netns@wg.service" ];
+  # creating proxy service on socket, which forwards the same port from the root namespace to the isolated namespace
+  systemd.services."proxy-to-deluged" = {
+   enable = true;
+   description = "Proxy to Deluge Daemon in Network Namespace";
+   requires = [ "deluged.service" "proxy-to-deluged.socket" ];
+   after = [ "deluged.service" "proxy-to-deluged.socket" ];
+   unitConfig = { JoinsNamespaceOf = "deluged.service"; };
    serviceConfig = {
-     Type = "oneshot";
-     RemainAfterExit = true;
-     ExecStart = with pkgs; writers.writeBash "wg-up" ''
-       set -e
-       ${iproute2}/bin/ip link add wg0 type wireguard
-       ${iproute2}/bin/ip link set wg0 netns wg
-       ${iproute2}/bin/ip -n wg address add 10.8.0.1/32 dev wg0
-       # ${iproute2}/bin/ip -n wg -6 address add <ipv6 VPN addr/cidr> dev wg0
-       ${iproute2}/bin/ip netns exec wg \
-         ${wireguard-tools}/bin/wg set wg0 \
-              listen-port 51820 \
-              private-key ${config.sops.secrets.wg-private.path} \
-              preshared-key ${config.sops.secrets.wg-preshared.path} \
-              peer g28kfEFI+VG5mZEK84EQKJ86J8dSqSrjtiEGiLTbKkE= \
-              persistent-keepalive 15 \
-              allowed-ips 0.0.0.0/0 \
-              endpoint 194.164.174.131:51820
-       ${iproute2}/bin/ip -n wg link set wg0 up
-       # need to set lo up as network namespace is started with lo down
-       ${iproute2}/bin/ip -n wg link set lo up
-       ${iproute2}/bin/ip -n wg route add default dev wg0
-       # ${iproute2}/bin/ip -n wg -6 route add default dev wg0
-     '';
-     ExecStop = with pkgs; writers.writeBash "wg-down" ''
-       ${iproute2}/bin/ip -n wg route del default dev wg0
-       # ${iproute2}/bin/ip -n wg -6 route del default dev wg0
-       ${iproute2}/bin/ip -n wg link del wg0
-     '';
+     User = "deluge";
+     Group = "storage";
+     ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:58846";
+     PrivateNetwork = "yes";
    };
   };
 }
