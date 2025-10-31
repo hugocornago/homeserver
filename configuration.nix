@@ -13,6 +13,7 @@
     ./modules/torrent/deluge.nix
     ./modules/torrent/autobrr.nix
     ./modules/torrent/sonarr.nix
+    ./modules/torrent/jackett.nix
   ];
 
   environment.systemPackages = with pkgs; [
