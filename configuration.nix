@@ -9,9 +9,10 @@
     ./modules/copyparty.nix
     ./modules/cloudflared/cloudflared.nix
     ./modules/cache.nix
-    ./modules/deluge.nix
     ./modules/wireguard.nix
-    ./modules/autobrr.nix
+    ./modules/torrent/deluge.nix
+    ./modules/torrent/autobrr.nix
+    ./modules/torrent/sonarr.nix
   ];
 
   environment.systemPackages = with pkgs; [
