@@ -11,6 +11,7 @@
     ./modules/cache.nix
     ./modules/deluge.nix
     ./modules/wireguard.nix
+    ./modules/autobrr.nix
   ];
 
   environment.systemPackages = with pkgs; [
