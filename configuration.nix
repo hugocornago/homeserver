@@ -15,6 +15,7 @@
     ./modules/torrent/sonarr.nix
     ./modules/torrent/jackett.nix
     ./modules/jellyfin.nix
+    ./modules/bullen.nix
   ];
 
   environment.systemPackages = with pkgs; [

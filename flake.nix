@@ -15,6 +15,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    bullen = {
+      url = "github:hugocornago/bullenisthegoat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -33,6 +37,8 @@
     overlays = [
       inputs.neovim-nightly-overlay.overlays.default
       copyparty.overlays.default
+      inputs.bullen.overlays.default
+
       unstable-packages
     ];
   in {
