@@ -8,8 +8,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
     copyparty.url = "github:9001/copyparty";
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -17,6 +17,10 @@
     };
     bullen = {
       url = "github:hugocornago/bullenisthegoat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -35,9 +39,10 @@
       };
     };
     overlays = [
-      inputs.neovim-nightly-overlay.overlays.default
+      # inputs.neovim-nightly-overlay.overlays.default
       copyparty.overlays.default
       inputs.bullen.overlays.default
+      inputs.nix-minecraft.overlay
 
       unstable-packages
     ];
@@ -48,9 +53,11 @@
         disko.nixosModules.disko
         copyparty.nixosModules.default
         sops-nix.nixosModules.sops
+        inputs.nix-minecraft.nixosModules.minecraft-servers
 
         {
           nixpkgs.overlays = overlays;
+          nixpkgs.config.allowUnfree = true;
         }
 
         ./disk-config.nix

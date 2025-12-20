@@ -16,6 +16,7 @@
     ./modules/torrent/jackett.nix
     ./modules/jellyfin.nix
     ./modules/bullen.nix
+    ./modules/minecraft.nix
   ];
 
   environment.systemPackages = with pkgs; [
