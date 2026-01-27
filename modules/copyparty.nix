@@ -1,4 +1,4 @@
-{config, ...}: {
+{config, pkgs, ...}: {
   # create custom user and group for copyparty
   users.groups.storage = {};
   users.users.copyparty = {
@@ -37,6 +37,10 @@
 
       # reverse proxy
       rproxy = -1;
+
+      # opengraph (discord embeds)
+      og = true;
+      og-ua = "(Discord|Twitter|Slack)bot";
     };
 
     # create users
