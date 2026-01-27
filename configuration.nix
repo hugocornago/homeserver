@@ -58,6 +58,8 @@
     secrets.cloudflared-ssh-homeserver-tunnel = {};
   };
 
+  programs.nix-ld.enable = true;
+
   system.stateVersion = "25.05";
   nix.settings.experimental-features = ["nix-command" "flakes"];
 }
