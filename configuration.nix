@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./modules/neovim/neovim.nix
+    ./modules/ddclient.nix
     ./modules/mosquitto.nix
     ./modules/copyparty.nix
     ./modules/cloudflared/cloudflared.nix
@@ -42,7 +43,7 @@
   networking.networkmanager.enable = true;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 80 3923 9033];
+    allowedTCPPorts = [22 80 3923 9033 1883];
   };
   services.openssh.enable = true;
 
