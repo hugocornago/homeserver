@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./modules/neovim/neovim.nix
+    ./modules/mosquitto.nix
     ./modules/copyparty.nix
     ./modules/cloudflared/cloudflared.nix
     ./modules/cache.nix
