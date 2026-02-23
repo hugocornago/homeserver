@@ -1,18 +1,32 @@
 {config, ...}:
 {
-  sops.secrets.mosquitto-password = {};
+  sops.secrets = {
+    mosquitto-robot-password = {};
+    mosquitto-web-password = {};
+  };
+
   services.mosquitto = {
     enable = true;
     listeners = [
       {
         users.robot = {
           acl = [
-            "readwrite #"
+            "read /robot/update_scripts"
+            "read /robot/run_scripts"
+            "write /robot/odometry_update"
+            "write /robot/speed_update"
           ];
-          hashedPasswordFile = "${config.sops.secrets.mosquitto-password.path}";
+          hashedPasswordFile = "${config.sops.secrets.mosquitto-robot-password.path}";
         };
-        settings = {
-          protocol = "websockets";
+
+        users.web = {
+          acl = [
+            "write /robot/update_scripts"
+            "write /robot/run_scripts"
+            "read /robot/odometry_update"
+            "read /robot/speed_update"
+          ];
+          hashedPasswordFile = "${config.sops.secrets.mosquitto-web-password.path}";
         };
       }
     ];
