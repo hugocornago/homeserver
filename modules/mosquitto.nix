@@ -7,16 +7,24 @@
 
   services.mosquitto = {
     enable = true;
+    logType = ["all"];
     listeners = [
       {
+        users.test = {
+          acl = [ 
+            "read robot/data/#"
+            "write robot/action/#"
+          ];
+          password = "testpassword";
+        };
+
         users.robot = {
           acl = [
-            "read /robot/update_scripts"
-            "read /robot/run_scripts"
-            "write /robot/odometry_update"
-            "write /robot/speed_update"
+            "write robot/data/#"
+            "read robot/action/#"
           ];
-          hashedPasswordFile = "${config.sops.secrets.mosquitto-robot-password.path}";
+          password = "robotiscool";
+          # hashedPasswordFile = "${config.sops.secrets.mosquitto-robot-password.path}";
         };
 
         users.web = {
