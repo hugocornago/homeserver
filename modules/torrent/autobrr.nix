@@ -1,5 +1,4 @@
-{ config, ...}:
-{
+{config, ...}: {
   sops.secrets.autobrr = {};
   services.autobrr = {
     enable = true;

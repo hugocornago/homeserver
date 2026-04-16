@@ -1,6 +1,5 @@
-{config,...}:
-{
-	sops.secrets.attic = {};
+{config, ...}: {
+  sops.secrets.attic = {};
   services.atticd = {
     enable = true;
 
@@ -10,7 +9,7 @@
     settings = {
       listen = "[::]:9033";
 
-      jwt = { };
+      jwt = {};
 
       # Data chunking
       #
@@ -37,4 +36,3 @@
     };
   };
 }
-

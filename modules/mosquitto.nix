@@ -1,5 +1,4 @@
-{config, ...}:
-{
+{config, ...}: {
   sops.secrets = {
     mosquitto-robot-password = {};
     mosquitto-web-password = {};
@@ -11,7 +10,7 @@
     listeners = [
       {
         users.test = {
-          acl = [ 
+          acl = [
             "read robot/data/#"
             "write robot/action/#"
           ];

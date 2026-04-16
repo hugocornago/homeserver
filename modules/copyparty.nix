@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   # create custom user and group for copyparty
   users.groups.storage = {};
   users.users.copyparty = {

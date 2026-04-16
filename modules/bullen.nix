@@ -1,8 +1,7 @@
-{pkgs,...}:
-{
+{pkgs, ...}: {
   systemd.services.bullen-ws = {
     enable = true;
-    after = [ "network.target" ];
+    after = ["network.target"];
     description = "bullen websocket";
     serviceConfig = {
       Type = "exec";
