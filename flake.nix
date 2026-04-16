@@ -8,6 +8,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+		deploy-rs.url = "github:serokell/deploy-rs";
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
     copyparty.url = "github:9001/copyparty";
@@ -31,6 +32,7 @@
     disko,
     copyparty,
     sops-nix,
+		deploy-rs,
     ...
   } @ inputs: let
     unstable-packages = final: prev: {
@@ -68,5 +70,16 @@
         inherit self inputs;
       };
     };
+
+		deploy.nodes.home = {
+			hostname = "server";
+			profiles.system = {
+				sshUser = "root";
+				user = "root";
+				path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.homeserver;
+			};
+		};
+
+		checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
