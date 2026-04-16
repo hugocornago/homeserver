@@ -8,7 +8,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-		deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.url = "github:serokell/deploy-rs";
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
     copyparty.url = "github:9001/copyparty";
@@ -20,10 +20,6 @@
       url = "github:hugocornago/bullenisthegoat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-minecraft = {
-      url = "github:Infinidoge/nix-minecraft";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -32,7 +28,7 @@
     disko,
     copyparty,
     sops-nix,
-		deploy-rs,
+    deploy-rs,
     ...
   } @ inputs: let
     unstable-packages = final: prev: {
@@ -44,7 +40,6 @@
       # inputs.neovim-nightly-overlay.overlays.default
       copyparty.overlays.default
       inputs.bullen.overlays.default
-      inputs.nix-minecraft.overlay
 
       unstable-packages
     ];
@@ -55,7 +50,6 @@
         disko.nixosModules.disko
         copyparty.nixosModules.default
         sops-nix.nixosModules.sops
-        inputs.nix-minecraft.nixosModules.minecraft-servers
 
         {
           nixpkgs.overlays = overlays;
@@ -71,15 +65,15 @@
       };
     };
 
-		deploy.nodes.home = {
-			hostname = "server";
-			profiles.system = {
-				sshUser = "root";
-				user = "root";
-				path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.homeserver;
-			};
-		};
+    deploy.nodes.home = {
+      hostname = "server";
+      profiles.system = {
+        sshUser = "root";
+        user = "root";
+        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.homeserver;
+      };
+    };
 
-		checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
