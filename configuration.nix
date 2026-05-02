@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    ./modules/duckdns.nix
     ./modules/neovim/neovim.nix
     ./modules/ddclient.nix
     ./modules/mosquitto.nix
