@@ -12,7 +12,7 @@
     web.enable = true;
     web.port = 8112;
 
-    declarative = true;
+    declarative = false;
     config = {
       download_location = "/storage/media/torrents";
       allow_remote = "true";
