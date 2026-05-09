@@ -1,5 +1,7 @@
 {config, ...}: {
   sops.secrets.cloudflare-token = {};
+
+  systemd.services.ddclient.after = [ "nss-user-lookup.target" ];
   services.ddclient = {
     enable = true;
     interval = "5min";
