@@ -19,6 +19,7 @@
     ./modules/jellyfin.nix
     ./modules/bullen.nix
     ./modules/minecraft.nix
+    ./modules/syncthing.nix
   ];
 
   environment.systemPackages = with pkgs; [
