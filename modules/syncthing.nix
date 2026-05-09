@@ -1,5 +1,5 @@
-{config,...}:{
-  networking.firewall.allowedTCPPorts = [ 8384 ];
+{config, ...}: {
+  networking.firewall.allowedTCPPorts = [8384];
   sops.secrets.syncthing-password = {};
   services.syncthing = {
     enable = true;
@@ -24,12 +24,12 @@
       "Default" = {
         id = "default";
         path = "/storage/syncthing/Sync";
-        devices = [ builtins.attrNames config.services.syncthing.settings.devices ];
+        devices = [builtins.attrNames config.services.syncthing.settings.devices];
       };
       "University" = {
         path = "/storage/syncthing/uni";
         id = "grghq-etfgu";
-        devices = [ builtins.attrNames config.services.syncthing.settings.devices ];
+        devices = [builtins.attrNames config.services.syncthing.settings.devices];
       };
     };
   };
