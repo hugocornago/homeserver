@@ -5,7 +5,7 @@
     enable = true;
     openDefaultPorts = true;
     guiPasswordFile = config.sops.secrets.syncthing-password.path;
-    guiAddress = ["0.0.0.0:8384"];
+    guiAddress = "0.0.0.0:8384";
     settings.devices = {
       laptop = {
         id = "Q3PGPXU-676NQNY-5KDJMQG-DYVJSYY-TEVS6XC-35WXJ7T-KFHNC7E-O6WVDAE";
@@ -24,12 +24,12 @@
       "Default" = {
         id = "default";
         path = "/storage/syncthing/Sync";
-        devices = [builtins.attrNames config.services.syncthing.settings.devices];
+        devices = builtins.attrNames config.services.syncthing.settings.devices;
       };
       "University" = {
         path = "/storage/syncthing/uni";
         id = "grghq-etfgu";
-        devices = [builtins.attrNames config.services.syncthing.settings.devices];
+        devices = builtins.attrNames config.services.syncthing.settings.devices;
       };
     };
   };
