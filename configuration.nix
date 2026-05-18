@@ -20,6 +20,7 @@
     ./modules/bullen.nix
     ./modules/minecraft.nix
     ./modules/syncthing.nix
+    ./modules/suwayomi.nix
   ];
 
   environment.systemPackages = with pkgs; [
