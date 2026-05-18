@@ -1,5 +1,4 @@
 {config, ...}: {
-  sops.secrets.suwayomi-password = {};
   services.suwayomi-server = {
     enable = true;
     group = "storage";
@@ -8,11 +7,12 @@
       # Network
       ip = "127.0.0.1";
       port = 4577;
+      debugLogsEnabled = true;
 
       # Authentication
-      basicAuthEnabled = true;
-      basicAuthUsername = "cornago";
-      basicAuthPasswordFile = "${config.sops.secrets.suwayomi-password.path}";
+      #basicAuthEnabled = true;
+      #basicAuthUsername = "cornago";
+      authMode = "none";
 
       # Updater
       autoDownloadNewChapters = true;
