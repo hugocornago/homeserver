@@ -53,6 +53,7 @@
     allowedTCPPorts = [22 80 3923 9033 1883];
   };
   services.openssh.enable = true;
+  services.fail2ban.enable = true;
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOHAzlWTCK89b4vehheZHX724HmclxzHnOq4RBEyF99 private"
