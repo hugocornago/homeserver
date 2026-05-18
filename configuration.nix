@@ -31,6 +31,8 @@
     nix-output-monitor
     nh
     alejandra
+    ripgrep
+    fd
   ];
 
   boot = {
