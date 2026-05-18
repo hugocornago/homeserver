@@ -27,6 +27,8 @@
     git
     lazygit
     tmux
+    nix-output-monitor
+    nh
   ];
 
   boot = {
