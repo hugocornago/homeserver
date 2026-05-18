@@ -29,6 +29,7 @@
     tmux
     nix-output-monitor
     nh
+    alejandra
   ];
 
   boot = {
