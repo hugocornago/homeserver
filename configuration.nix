@@ -67,6 +67,8 @@
     secrets.cloudflared-ssh-homeserver-tunnel = {};
   };
 
+  programs.bash.shellAliases."rebuild" = "nh os switch /root/homeserver -H homeserver --bypass-root-check";
+
   programs.nix-ld.enable = true;
 
   system.stateVersion = "25.05";
