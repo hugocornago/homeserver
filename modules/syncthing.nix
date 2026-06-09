@@ -3,9 +3,12 @@
   sops.secrets.syncthing-password = {};
   services.syncthing = {
     enable = true;
+    group = "storage";
     openDefaultPorts = true;
-    guiPasswordFile = config.sops.secrets.syncthing-password.path;
+    # guiPasswordFile = config.sops.secrets.syncthing-password.path;
+    # settings.gui.user = "syncthing";
     guiAddress = "0.0.0.0:8384";
+    settings.gui.insecureAdminAccess = true;
     settings.devices = {
       laptop = {
         id = "Q3PGPXU-676NQNY-5KDJMQG-DYVJSYY-TEVS6XC-35WXJ7T-KFHNC7E-O6WVDAE";
