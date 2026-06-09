@@ -2,7 +2,7 @@
   description = "homeserver with NixOS!";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     disko = {
       url = "github:nix-community/disko";
@@ -20,6 +20,7 @@
       url = "github:hugocornago/bullenisthegoat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs = {
@@ -40,6 +41,7 @@
       # inputs.neovim-nightly-overlay.overlays.default
       copyparty.overlays.default
       inputs.bullen.overlays.default
+      inputs.nix-minecraft.overlay
 
       unstable-packages
     ];
@@ -50,6 +52,7 @@
         disko.nixosModules.disko
         copyparty.nixosModules.default
         sops-nix.nixosModules.sops
+        inputs.nix-minecraft.nixosModules.minecraft-servers
 
         {
           nixpkgs.overlays = overlays;
