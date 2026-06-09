@@ -7,7 +7,7 @@
     interval = "5min";
     protocol = "cloudflare";
     passwordFile = "${config.sops.secrets.cloudflare-token.path}";
-    domains = ["mqtt.cornago.net"];
+    domains = ["mqtt.cornago.net" "minecraft.cornago.net"];
     zone = "cornago.net";
     ssl = true;
   };
