@@ -18,6 +18,7 @@
     ./modules/torrent/jackett.nix
     ./modules/jellyfin.nix
     ./modules/bullen.nix
+    ./modules/immich.nix
     ./modules/minecraft.nix
     ./modules/syncthing.nix
     ./modules/suwayomi.nix
