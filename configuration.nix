@@ -71,6 +71,7 @@
   };
 
   programs.bash.shellAliases."rebuild" = "nh os switch /root/homeserver -H homeserver --bypass-root-check";
+  programs.bash.shellAliases."boot" = "nh os boot /root/homeserver -H homeserver --bypass-root-check";
 
   programs.nix-ld.enable = true;
 
