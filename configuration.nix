@@ -16,7 +16,6 @@
     ./modules/minecraft.nix
     ./modules/mosquitto.nix
     ./modules/neovim/neovim.nix
-    ./modules/portainer.nix
     ./modules/suwayomi.nix
     ./modules/syncthing.nix
     ./modules/torrent/autobrr.nix
