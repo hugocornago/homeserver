@@ -5,23 +5,25 @@
   ...
 }: {
   imports = [
-    ./modules/neovim/neovim.nix
-    ./modules/ddclient.nix
-    ./modules/mosquitto.nix
-    ./modules/copyparty.nix
-    ./modules/cloudflared/cloudflared.nix
-    ./modules/cache.nix
-    ./modules/wireguard.nix
-    ./modules/torrent/deluge.nix
-    ./modules/torrent/autobrr.nix
-    ./modules/torrent/sonarr.nix
-    ./modules/torrent/jackett.nix
-    ./modules/jellyfin.nix
     ./modules/bullen.nix
+    ./modules/cache.nix
+    ./modules/cloudflared/cloudflared.nix
+    ./modules/copyparty.nix
+    ./modules/ddclient.nix
+    ./modules/docker.nix
     ./modules/immich.nix
+    ./modules/jellyfin.nix
     ./modules/minecraft.nix
-    ./modules/syncthing.nix
+    ./modules/mosquitto.nix
+    ./modules/neovim/neovim.nix
+    ./modules/portainer.nix
     ./modules/suwayomi.nix
+    ./modules/syncthing.nix
+    ./modules/torrent/autobrr.nix
+    ./modules/torrent/deluge.nix
+    ./modules/torrent/jackett.nix
+    ./modules/torrent/sonarr.nix
+    ./modules/wireguard.nix
   ];
 
   environment.systemPackages = with pkgs; [
