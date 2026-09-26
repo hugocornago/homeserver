@@ -73,6 +73,11 @@
   programs.bash.shellAliases."rebuild" = "nh os switch /root/homeserver -H homeserver --bypass-root-check";
   programs.bash.shellAliases."boot" = "nh os boot /root/homeserver -H homeserver --bypass-root-check";
 
+  programs.bash.interactiveShellInit = ''
+    COLAB_TOKEN=$(podman logs colab 2>/dev/null| grep 'http.*?token=' | tail -n1 | cut -d'/' -f5 | cut -d' ' -f1)
+    echo "http://127.0.0.1:9000/$COLAB_TOKEN"
+  '';
+
   programs.nix-ld.enable = true;
 
   system.stateVersion = "25.05";
