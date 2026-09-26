@@ -20,6 +20,13 @@
     '';
   };
 
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "* * * * *    root  chown -R root:storage /storage && chmod -R g+wrx /storage"
+    ];
+  };
+
   sops.secrets.copyparty-password.owner = "copyparty";
 
   services.copyparty = {
