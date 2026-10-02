@@ -11,27 +11,27 @@
     settings.gui.insecureAdminAccess = true;
     settings.devices = {
       laptop = {
-        id = "Q3PGPXU-676NQNY-5KDJMQG-DYVJSYY-TEVS6XC-35WXJ7T-KFHNC7E-O6WVDAE";
+        id = "HPSSPX2-K4ELNWZ-LV7Y7DU-WLTI3KZ-F6SP626-Q6DXKS3-ATRGHUM-RFX6MAT";
         addresses = ["dynamic"];
       };
       desktop = {
-        id = "PHZPZYQ-4TLAKNP-FJL44RM-E27Z7MV-CFWRXWT-DTBIPOV-35J2UFA-3O6M6QT";
-        addresses = ["tcp://desktop.lan:51820" "dynamic"];
+        id = "HSFKSZZ-XICCJXX-KILDD5N-UI7WRKX-4E2RIGK-DVBH777-QGFRV5A-BTYWJA6";
+        addresses = ["dynamic"];
       };
-      big-free-arm = {
-        id = "NYLRYKD-7G7RJ77-7EEFZ5E-O5WKGKN-2FIGNUL-2IVDZHC-F7HJI52-Y2UUKQ2";
-        addresses = ["tcp://1.1.1.1:51820"];
-      };
+      # big-free-arm = {
+      #   id = "NYLRYKD-7G7RJ77-7EEFZ5E-O5WKGKN-2FIGNUL-2IVDZHC-F7HJI52-Y2UUKQ2";
+      #   addresses = ["tcp://1.1.1.1:51820"];
+      # };
     };
     settings.folders = {
       "Default" = {
-        id = "default";
+        id = "general";
         path = "/storage/syncthing/Sync";
         devices = builtins.attrNames config.services.syncthing.settings.devices;
       };
       "University" = {
         path = "/storage/syncthing/uni";
-        id = "grghq-etfgu";
+        id = "uni";
         devices = builtins.attrNames config.services.syncthing.settings.devices;
       };
     };
@@ -40,6 +40,7 @@
   services.syncthing.relay = {
     enable = true;
     providedBy = "Cornago's Private Relay.";
+    pools = [];
     port = 22067;
     statusPort = 22070;
   };
