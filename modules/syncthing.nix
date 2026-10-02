@@ -1,5 +1,5 @@
 {config, ...}: {
-  networking.firewall.allowedTCPPorts = [8384];
+  networking.firewall.allowedTCPPorts = [8384 22067 22070];
   sops.secrets.syncthing-password = {};
   services.syncthing = {
     enable = true;
@@ -35,5 +35,12 @@
         devices = builtins.attrNames config.services.syncthing.settings.devices;
       };
     };
+  };
+
+  services.syncthing.relay = {
+    enable = true;
+    providedBy = "Cornago's Private Relay.";
+    port = 22067;
+    statusPort = 22070;
   };
 }
