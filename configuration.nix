@@ -18,6 +18,7 @@
     ./modules/neovim/neovim.nix
     ./modules/suwayomi.nix
     ./modules/syncthing.nix
+    ./modules/tailscale.nix
     ./modules/torrent/autobrr.nix
     ./modules/torrent/deluge.nix
     ./modules/torrent/jackett.nix
