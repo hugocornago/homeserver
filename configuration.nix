@@ -35,6 +35,7 @@
     alejandra
     ripgrep
     fd
+    helix
   ];
 
   boot = {
@@ -72,6 +73,7 @@
 
   programs.bash.shellAliases."rebuild" = "nh os switch /root/homeserver -H homeserver --bypass-root-check";
   programs.bash.shellAliases."boot" = "nh os boot /root/homeserver -H homeserver --bypass-root-check";
+  environment.variables.TERMCOLOR = "truecolor";
 
   programs.bash.interactiveShellInit = ''
     COLAB_TOKEN=$(podman logs colab 2>/dev/null| grep 'http.*?token=' | tail -n1 | cut -d'/' -f5 | cut -d' ' -f1)
