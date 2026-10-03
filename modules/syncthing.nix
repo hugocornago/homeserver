@@ -5,8 +5,6 @@
     enable = true;
     group = "storage";
     openDefaultPorts = true;
-    # guiPasswordFile = config.sops.secrets.syncthing-password.path;
-    # settings.gui.user = "syncthing";
     guiAddress = "0.0.0.0:8384";
     settings.gui.insecureAdminAccess = true;
     settings.devices = {
@@ -28,11 +26,13 @@
         id = "general";
         path = "/storage/syncthing/Sync";
         devices = builtins.attrNames config.services.syncthing.settings.devices;
+        ignorePerms = true;
       };
       "University" = {
         path = "/storage/syncthing/uni";
         id = "uni";
         devices = builtins.attrNames config.services.syncthing.settings.devices;
+        ignorePerms = true;
       };
     };
   };
